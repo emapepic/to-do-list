@@ -1,10 +1,9 @@
-export default function InputFields () {
+export default function InputFields({showTask, inputValue, setInput}) {
     return (
       <div>
-        <input type="text" />
-            <input type="checkbox" />
-            <button>Save</button>
-            <button>Delete</button>
+        {/* da bi uzeli vrijednost iz polja moramo je staviti u value pomocu funkcije koju stavljamo u onChange */}
+        <input type="text" value={inputValue} onChange={setInput} />
+        <button onClick={showTask}>Save</button>
       </div>
     );
 }
