@@ -1,5 +1,6 @@
 :root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  --primary-color: #6D94C5;
 }
 
 * {
@@ -13,11 +14,59 @@ body {
 }
 
 header {
-  background-color: #6D94C5;
+  background-color: var(--primary-color);
   padding: 10px;
+  padding-left: 25px;
 }
 
 h1 {
   font-size: 2em;
   color: whitesmoke;
+}
+
+button {
+  color: whitesmoke;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.main-container {
+  margin: 20px 50px;
+}
+
+.add-btn {
+  background-color: var(--primary-color);
+}
+
+.input-container {
+  display: flex;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.input-container button {
+  background-color: #3e8173;
+  padding: 5px 15px;
+}
+
+.input-container input {
+  outline: none;
+}
+
+.task-container {
+  background-color: whitesmoke;
+  padding: 10px;
+  width: 50vw;
+}
+
+.task-container ul {
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+.task-container li {
+  padding: 5px;
+  border-bottom: 1px solid black;
 }

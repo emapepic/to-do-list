@@ -21,11 +21,13 @@ function App() {
   return (
     <>
       <Header/>
-      <TasksContainer tasks={tasks}/>
-      {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
-        tu vrijednost u funkciji showTask stavljamo u niz postojecih taskova*/}
-      {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} showTask={showTask}/>}
-      <button onClick={addTask}>Add</button>
+      <div className='main-container'>
+        {tasks.length > 0 && <TasksContainer tasks={tasks}/>}
+        {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
+          tu vrijednost u funkciji showTask stavljamo u niz postojecih taskova*/}
+        {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} showTask={showTask}/>}
+        <button className='add-btn' onClick={addTask}>Add task</button>
+      </div>
     </>
   )
 }
