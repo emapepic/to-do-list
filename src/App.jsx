@@ -14,15 +14,18 @@ function App() {
 
   function showTask() {
     // da se u niz postojecih taskova doda novi task koji je unesen u input polje
-    setTasks(prevTasks => [...prevTasks, inputValue]);
-    setInputValue('');
+    if(inputValue!='') {
+      setTasks(prevTasks => [...prevTasks, inputValue]);
+      setInputValue('');
+      setShowInputFields(false);
+    }
   }
 
   return (
     <>
       <Header/>
       <div className='main-container'>
-        {tasks.length > 0 && <TasksContainer tasks={tasks}/>}
+        {tasks.length > 0 && <TasksContainer tasks={tasks} setTasks={setTasks} />}
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji showTask stavljamo u niz postojecih taskova*/}
         {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} showTask={showTask}/>}

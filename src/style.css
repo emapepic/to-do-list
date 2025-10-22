@@ -26,7 +26,7 @@ h1 {
 
 button {
   color: whitesmoke;
-  padding: 5px 20px;
+  padding: 5px 15px;
   border-radius: 5px;
   border-style: none;
   cursor: pointer;
@@ -48,7 +48,6 @@ button {
 
 .input-container button {
   background-color: #3e8173;
-  padding: 5px 15px;
 }
 
 .input-container input {
@@ -59,6 +58,7 @@ button {
   background-color: whitesmoke;
   padding: 10px;
   width: 50vw;
+  margin-bottom: 10px;
 }
 
 .task-container ul {
@@ -69,4 +69,27 @@ button {
 .task-container li {
   padding: 5px;
   border-bottom: 1px solid black;
+}
+
+.list-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-btn {
+  background-color: rgb(160, 36, 36);
+}
+
+.task-btns input[type="checkbox"] {
+  cursor: pointer;
+  align-self: stretch;
+  width: 18px;
+  accent-color: var(--primary-color);
 }
