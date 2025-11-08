@@ -1,10 +1,10 @@
-export default function Task ({taskDesc, deleteTask}) {
+export default function Task ({taskDesc, deleteTask, completedTask, checked}) {
     return (
         <li className="list-items">
-            {taskDesc}
+            <span className={checked ? "completed-list-item" : ""}>{taskDesc}</span>
             <div className="task-btns">
-                <input type="checkbox" />
-                <button className="delete-btn" onClick={deleteTask}>Delete</button> {/* ovdje pozivamo funkciju za brisanje */}
+                <input type="checkbox" onChange={completedTask} checked={checked} />
+                <button className="delete-btn" onClick={deleteTask}>Delete</button>
             </div>
         </li>
     );

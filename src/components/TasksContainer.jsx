@@ -1,16 +1,35 @@
 import Task from './Task.jsx';
 
-export default function TasksContainer({tasks, setTasks}) { {/* prosledjujemo setTask kako bi mogli promijeniti niz tasks */}
-    const deleteTask = (index) => { {/* pravimo funkciju za brisanje */}
-        setTasks(prev => prev.filter((_, id) => id != index)); {/* _ predstavlja elemenat al nam on nije potreban pa ga oznacavamo sa _ */}
+export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
+    // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
+    const deleteTask = (id) => {
+        setTasks(prevTasks => prevTasks.filter(task => task.id !== id)); 
     }
+
+    // kada se klikne checkbox pokrece se funkcija koja trazi id taska koji je cekiran i mijenja njegovo svojstvo completed, ostale taskove ne mijenja
+    const completedTask = (id) => {
+        setTasks(prevTasks => 
+            prevTasks.map(task =>
+            task.id === id ? {...task, completed: !task.completed} : task)
+        )
+    }
+
+    // soritra taskove tako da uradjeni idu na dno
+    // sort poredi dva elementa niza (a, b) koji su true ili false ili 1 ili 0 i oduzima ih tako ce kada se sortiraju completed biti dolje, ostali gore
+    const sortedTasks = [...tasks].sort((a, b) => a.completed - b.completed);
+
     return (
         <div className='task-container'>
             <ul>
                 {/* komponenti se prosledjuje niz taskova pa koristimo map da svaki task unesemo kao element liste */}
-                {tasks.map((task, index) => (
-                    <Task key={index} taskDesc={task} deleteTask={() => deleteTask(index)}/> 
-                ))} {/* prosledjujemo funkciju za brisanje komponenti Task koja je ima kao prop */}
+                {sortedTasks.map((task) => ( // za svaki task u nizu se pravi komponenta Task
+                    <Task 
+                        key={task.id}
+                        taskDesc={task.text}
+                        checked={task.completed} 
+                        deleteTask={() => deleteTask(task.id)} 
+                        completedTask={() => completedTask(task.id)}/> 
+                ))}
             </ul>
         </div>
     );

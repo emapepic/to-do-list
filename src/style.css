@@ -93,3 +93,7 @@ button {
   width: 18px;
   accent-color: var(--primary-color);
 }
+
+.completed-list-item {
+  text-decoration: line-through;
+}
