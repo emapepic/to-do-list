@@ -75,6 +75,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .task-btns {
@@ -96,4 +97,11 @@ button {
 
 .completed-list-item {
   text-decoration: line-through;
+}
+
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: transparent;
 }
