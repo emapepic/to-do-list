@@ -27,7 +27,7 @@ function App() {
     <>
       <Header/>
       <div className='main-container'>
-        {tasks.length > 0 && <TasksContainer tasks={tasks} setTasks={setTasks} />}
+        {tasks.length > 0 ? <TasksContainer tasks={tasks} setTasks={setTasks} /> : <p>There's no tasks to complete, create new ones :)</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji showTask stavljamo u niz postojecih taskova*/}
         {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} showTask={showTask}/>}

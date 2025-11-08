@@ -38,6 +38,7 @@ button {
 
 .add-btn {
   background-color: var(--primary-color);
+  margin-top: 10px;
 }
 
 .input-container {
