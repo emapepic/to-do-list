@@ -1,7 +1,7 @@
-export default function InputFields({showTask, inputValue, setInput}) {
+export default function InputFields({addTask, inputValue, setInput}) {
   const handleEnter = (e) => {
     if(e.key === "Enter") {
-      showTask();
+      addTask();
     }
   }
 
@@ -9,7 +9,7 @@ export default function InputFields({showTask, inputValue, setInput}) {
     <div className='input-container'>
       {/* da bi uzeli vrijednost iz polja moramo je staviti u value pomocu funkcije koju stavljamo u onChange */}
       <input type="text" value={inputValue} onChange={setInput} onKeyDown={handleEnter} />
-      <button onClick={showTask}>Save</button>
+      <button onClick={addTask}>Save</button>
     </div>
   );
 }
