@@ -39,7 +39,7 @@ function App() {
     <>
       <Header/>      
       <div className='main-container'>
-        <FilterButtons setFilter={setFilter} />
+        <FilterButtons filter={filter} setFilter={setFilter} />
         {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} filter={filter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}

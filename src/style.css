@@ -1,7 +1,7 @@
 :root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 16px;
-  --primary-color: #6D94C5;
+  --primary-color: #5979a1;
 }
 
 * {
@@ -43,6 +43,10 @@ button {
   margin-top: 10px;
 }
 
+.add-btn:hover {
+  background-color: #435a77;
+}
+
 .input-container {
   display: flex;
   margin: 10px 0;
@@ -51,6 +55,10 @@ button {
 
 .input-container button {
   background-color: #3e8173;
+}
+
+.input-container button:hover {
+  background-color: #2f6156;
 }
 
 .input-container input {
@@ -88,7 +96,11 @@ button {
 }
 
 .delete-btn {
-  background-color: rgb(160, 36, 36);
+  background-color: #a02424;
+}
+
+.delete-btn:hover {
+  background-color: #7c1c1c;
 }
 
 .task-btns input[type="checkbox"] {
@@ -118,4 +130,13 @@ input[type="date"] {
 
 .filters .btn {
   color: black;
+}
+
+.filters .btn:hover {
+  background-color: rgb(206, 206, 206);
+}
+
+.filters .btn.active {
+  background-color: #5979a1;
+  color: whitesmoke;
 }
