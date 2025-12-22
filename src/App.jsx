@@ -8,6 +8,7 @@ function App() {
   const [showInputFields, setShowInputFields] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [filter, setFilter] = useState('All');
 
   function showInputField() {
     setShowInputFields(true);
@@ -24,12 +25,22 @@ function App() {
     }
   }
 
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'Active') {
+      return !task.completed;
+    }
+    if (filter === 'Finished') {
+      return task.completed;
+    }
+    return true;
+  });
+
   return (
     <>
       <Header/>      
       <div className='main-container'>
-        <FilterButtons />
-        {tasks.length > 0 ? <TasksContainer tasks={tasks} setTasks={setTasks} /> : <p>There's no tasks to complete, create new ones :)</p> }
+        <FilterButtons setFilter={setFilter} />
+        {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} filter={filter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
         {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask}/>}

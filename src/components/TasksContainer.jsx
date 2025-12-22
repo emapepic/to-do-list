@@ -1,6 +1,6 @@
 import Task from './Task.jsx';
 
-export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
+export default function TasksContainer({tasks, setTasks, filter}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
     // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
     const deleteTask = (id) => {
         setTasks(prevTasks => prevTasks.filter(task => task.id !== id)); 
@@ -12,6 +12,14 @@ export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo se
             prevTasks.map(task =>
             task.id === id ? {...task, completed: !task.completed} : task)
         )
+    }
+
+    if (tasks.length === 0) {
+        return (
+        <div className="task-container">
+            <p>No {filter.toLowerCase()} tasks found</p>
+        </div>
+        );
     }
 
     // soritra taskove tako da uradjeni idu na dno

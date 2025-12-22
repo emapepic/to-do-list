@@ -98,10 +98,6 @@ button {
   accent-color: var(--primary-color);
 }
 
-.completed-list-item {
-  text-decoration: line-through;
-}
-
 input[type="date"] {
   padding: 8px;
   border: 1px solid #ccc;

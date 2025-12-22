@@ -1,9 +1,9 @@
-export default function FilterButtons() {
+export default function FilterButtons({setFilter}) {
     return(
         <ul className="filters">
-            <li><button className="btn">All</button></li>
-            <li><button className="btn">Active</button></li>
-            <li><button className="btn">Finished</button></li>
+            <li><button className="btn" onClick={() => setFilter('All')}>All</button></li>
+            <li><button className="btn" onClick={() => setFilter('Active')}>Active</button></li>
+            <li><button className="btn" onClick={() => setFilter('Finished')}>Finished</button></li>
         </ul>
     );
 }
