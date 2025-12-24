@@ -144,3 +144,11 @@ input[type="date"] {
   background-color: #5979a1;
   color: whitesmoke;
 }
+
+.tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50vw;
+  color: whitesmoke;
+}
