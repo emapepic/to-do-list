@@ -14,6 +14,14 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
         )
     }
 
+    const updateTask = (id, newTaskDesc) => {
+        setTasks(prevTasks => 
+            prevTasks.map(task =>
+                task.id === id ? {...task, text: newTaskDesc} : task
+            )
+        )
+    }
+
     if (tasks.length === 0) {
         return (
         <div className="task-container">
@@ -36,7 +44,9 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
                         taskDesc={task.text}
                         checked={task.completed} 
                         deleteTask={() => deleteTask(task.id)} 
-                        completedTask={() => completedTask(task.id)}/> 
+                        completedTask={() => completedTask(task.id)}
+                        updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
+                    /> 
                 ))}
             </ul>
         </div>

@@ -43,7 +43,7 @@ button {
   margin-top: 10px;
 }
 
-.add-btn:hover {
+.add-btn:hover, .edit-btn:hover {
   background-color: #435a77;
 }
 
@@ -53,11 +53,11 @@ button {
   gap: 10px;
 }
 
-.input-container button {
+.save-btn {
   background-color: #3e8173;
 }
 
-.input-container button:hover {
+.save-btn:hover {
   background-color: #2f6156;
 }
 
@@ -119,6 +119,10 @@ input[type="date"] {
   border: 1px solid #ccc;
   border-radius: 8px;
   background: transparent;
+}
+
+.edit-btn {
+  background-color: var(--primary-color);
 }
 
 .filters {

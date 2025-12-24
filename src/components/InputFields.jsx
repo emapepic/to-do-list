@@ -9,7 +9,7 @@ export default function InputFields({addTask, inputValue, setInput}) {
     <div className='input-container'>
       {/* da bi uzeli vrijednost iz polja moramo je staviti u value pomocu funkcije koju stavljamo u onChange */}
       <input type="text" value={inputValue} onChange={setInput} onKeyDown={handleEnter} />
-      <button onClick={addTask}>Save</button>
+      <button className="save-btn" onClick={addTask}>Save</button>
     </div>
   );
 }
