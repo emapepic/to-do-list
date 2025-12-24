@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Header from './components/Header.jsx';
 import InputFields from './components/InputFields.jsx';
 import TasksContainer from './components/TasksContainer.jsx';
@@ -6,7 +6,12 @@ import FilterButtons from './components/FilterButtons.jsx';
 
 function App() {
   const [showInputFields, setShowInputFields] = useState(false);
-  const [tasks, setTasks] = useState([]);
+
+  // prikazemo initial state iz localStorage
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
   const [inputValue, setInputValue] = useState('');
   const [filter, setFilter] = useState('All');
 
@@ -24,6 +29,11 @@ function App() {
       setShowInputFields(false);
     }
   }
+
+  // niz task se cuva u localStorage kad dodje do njegove promjene
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const filteredTasks = tasks.filter(task => {
     if (filter === 'Active') {
