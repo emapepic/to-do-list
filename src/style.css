@@ -89,6 +89,10 @@ button {
   gap: 20px;
 }
 
+.completed-list-item {
+  text-decoration: line-through;
+}
+
 .task-btns {
   display: flex;
   align-items: center;
