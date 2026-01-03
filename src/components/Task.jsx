@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MoreOptions from "./MoreOptions";
 
 export default function Task ({taskDesc, deleteTask, completedTask, checked, updateTask}) {
     const [editOn, setEditOn] = useState(false);
@@ -22,7 +23,8 @@ export default function Task ({taskDesc, deleteTask, completedTask, checked, upd
                 <input type="checkbox" onChange={completedTask} checked={checked} />
                 {editOn && <button className="save-btn" onClick={saveTask}>Save</button>}
                 {!editOn && <button className="edit-btn" onClick={editTask}>Edit</button>}               
-                <button className="delete-btn" onClick={deleteTask}>Delete</button>               
+                <button className="delete-btn" onClick={deleteTask}>Delete</button>
+                <MoreOptions />             
             </div>
         </li>
     );

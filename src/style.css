@@ -156,3 +156,36 @@ input[type="date"] {
   width: 50vw;
   color: whitesmoke;
 }
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.more-options {
+  padding: 0 0.5rem;
+  background-color: transparent;
+  color: black;
+  font-size: 20px;
+  border-style: none;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  width: max-content;
+  background-color: whitesmoke;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.dropdown li {
+  border-bottom: none;
+  list-style-type: none;
+}
+
+.dropdown li:hover {
+  background-color: var(--primary-color);
+  color: whitesmoke;
+}
