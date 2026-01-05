@@ -58,15 +58,12 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
                 {sortedTasks.map((task) => ( // za svaki task u nizu se pravi komponenta Task
                     <Task 
                         key={task.id}
-                        taskDesc={task.text}
-                        checked={task.completed} 
+                        task={task}
                         deleteTask={() => deleteTask(task.id)} 
                         completedTask={() => completedTask(task.id)}
                         updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
                         setDueDate={(dueDate) => setDueDate(task.id, dueDate)}
-                        dueDate={task.dueDate}
                         setPriority={(priority) => setPriority(task.id, priority)}
-                        priority={task.priority}
                     /> 
                 ))}
             </ul>
