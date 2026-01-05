@@ -43,7 +43,7 @@ button {
   margin-top: 10px;
 }
 
-.add-btn:hover, .edit-btn:hover {
+.add-btn:hover, .edit-btn:hover, .close-btn:hover {
   background-color: #435a77;
 }
 
@@ -131,7 +131,7 @@ input[type="date"] {
   background: transparent;
 }
 
-.edit-btn {
+.edit-btn, .close-btn {
   background-color: var(--primary-color);
 }
 
@@ -211,4 +211,50 @@ input[type="date"] {
 
 .priority-high {
   color: #a02424;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.modal {
+  width: 50vw;
+  padding: 2rem;
+  background: #b1b1b1;
+}
+
+.modal .add-btn {
+  margin-top: 0;
+}
+
+.categories-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+.categories {
+  background-color: plum;
+  color: #2c2c2c;
+}
+
+.categories:hover {
+  background-color: rgb(182, 130, 182);
+}
+
+.close-btn-wrapper {
+  margin: 1rem;
+  margin-bottom: 0;
+  text-align: center;
 }

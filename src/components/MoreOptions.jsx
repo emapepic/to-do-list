@@ -1,9 +1,11 @@
 import { useState } from "react";
+import TaskCategories from "./TaskCategories";
 
 export default function MoreOptions({setPriority, setDueDate, dueDate}) {
     const [isOpen, setIsOpen] = useState(false);
     const [showPriority, setShowPriority] = useState(false);
     const [datePicker, setDatePicker] = useState(false);
+    const [showCategoryModal, setShowCategoryModal] = useState(false);
 
     return (
         <div className="dropdown-wrapper">
@@ -25,9 +27,12 @@ export default function MoreOptions({setPriority, setDueDate, dueDate}) {
                             )
                         }
                     </li>
-                    <li>Set category</li>
+                    <li onClick={() => setShowCategoryModal(true)}>
+                        Set category
+                    </li>
                 </ul>
             }
+            {showCategoryModal && (<TaskCategories onClose={() => setShowCategoryModal(false)} />)}
         </div>
     );
 }
