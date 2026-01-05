@@ -49,6 +49,7 @@ button {
 
 .input-container {
   display: flex;
+  align-items: center;
   margin: 10px 0;
   gap: 10px;
 }
@@ -63,6 +64,10 @@ button {
 
 .input-container input {
   outline: none;
+}
+
+.error-msg {
+  color: #a02424;
 }
 
 .task-container {

@@ -6,6 +6,7 @@ import FilterButtons from './components/FilterButtons.jsx';
 
 function App() {
   const [showInputFields, setShowInputFields] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
 
   // prikazemo initial state iz localStorage
   const [tasks, setTasks] = useState(() => {
@@ -21,13 +22,15 @@ function App() {
 
   function addTask() {
     // da se u niz postojecih taskova doda novi task koji je unesen u input polje
-    if(inputValue!='') {
+    if(inputValue.trim()!='') {
       setTasks(prevTasks => [...prevTasks, 
               {id: crypto.randomUUID(), text: inputValue, completed: false, priority: null}]); // svaka stavka je objekat koji sadrzi id, tekst i podatak da li je completed ili ne
               // crypto.randomUUID generise jedinstveni id
       setInputValue('');
       setShowInputFields(false);
+      setErrorMsg(false)
     }
+    else setErrorMsg(true);
   }
 
   // niz task se cuva u localStorage kad dodje do njegove promjene
@@ -56,7 +59,7 @@ function App() {
         {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} filter={filter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
-        {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask}/>}
+        {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask} errorMsg={errorMsg} />}
         <button className='add-btn' onClick={showInputField}>Add task</button>
       </div>
     </>
