@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MoreOptions from "./MoreOptions";
 
-export default function Task ({taskDesc, deleteTask, completedTask, checked, updateTask, setPriority}) {
+export default function Task ({taskDesc, deleteTask, completedTask, checked, updateTask, setPriority, priority}) {
     const [editOn, setEditOn] = useState(false);
     const [newTaskDesc, setNewTaskDesc] = useState();
 
@@ -17,8 +17,11 @@ export default function Task ({taskDesc, deleteTask, completedTask, checked, upd
 
     return (
         <li className="list-items">
-            {editOn && <input type="text" value={newTaskDesc} onChange={(e) => setNewTaskDesc(e.target.value)} />}
-            {!editOn && <span className={checked ? "completed-list-item" : ""}>{taskDesc}</span>}
+            <div className="task-desc">
+                {editOn && <input type="text" value={newTaskDesc} onChange={(e) => setNewTaskDesc(e.target.value)} />}
+                {!editOn && <span className={checked ? "completed-list-item" : ""}>{taskDesc}</span>}
+                {priority && <span className={`priority-${priority}`}>{priority}</span>}
+            </div>
             <div className="task-btns">
                 <input type="checkbox" onChange={completedTask} checked={checked} />
                 {editOn && <button className="save-btn" onClick={saveTask}>Save</button>}

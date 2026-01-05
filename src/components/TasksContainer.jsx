@@ -55,6 +55,7 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
                         completedTask={() => completedTask(task.id)}
                         updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
                         setPriority={(priority) => setPriority(task.id, priority)}
+                        priority={task.priority}
                     /> 
                 ))}
             </ul>

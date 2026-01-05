@@ -82,11 +82,16 @@ button {
   border-bottom: 1px solid black;
 }
 
-.list-items {
+.list-items,
+.task-desc {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+}
+
+.task-desc {
+  width: 100%;
 }
 
 .completed-list-item {
@@ -189,4 +194,16 @@ input[type="date"] {
 .dropdown li:hover {
   background-color: var(--primary-color);
   color: whitesmoke;
+}
+
+.priority-low {
+  color: #3e8173;
+}
+
+.priority-medium {
+  color: #b2b25c;
+}
+
+.priority-high {
+  color: #a02424;
 }
