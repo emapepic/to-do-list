@@ -1,15 +1,19 @@
 import { useState } from "react";
 
-export default function MoreOptions({setPriority}) {
+export default function MoreOptions({setPriority, setDueDate, dueDate}) {
     const [isOpen, setIsOpen] = useState(false);
     const [showPriority, setShowPriority] = useState(false);
+    const [datePicker, setDatePicker] = useState(false);
 
     return (
         <div className="dropdown-wrapper">
             <button className="more-options" onClick={() => setIsOpen(prev => !prev)}>⋮</button>
             {isOpen &&
                 <ul className="dropdown">
-                    <li>Set due date</li>
+                    <li onClick={() => setDatePicker(true)}>
+                        Set due date
+                    </li>
+                    {datePicker && (<input type='date' value={dueDate} onChange={(e) => {setDueDate(e.target.value); setDatePicker(false);}} />)}
                     <li className="dropdown-wrapper" onClick={() => setShowPriority(true)} onMouseLeave={() => setShowPriority(false)}>
                         Set priority
                         {showPriority && (

@@ -2,6 +2,7 @@ import Task from './Task.jsx';
 
 export default function TasksContainer({tasks, setTasks, filter}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
     // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
+    console.log(tasks);
     const deleteTask = (id) => {
         setTasks(prevTasks => prevTasks.filter(task => task.id !== id)); 
     }
@@ -30,6 +31,14 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
         )
     }
 
+    const setDueDate = (id, dueDate) => {
+        setTasks(prevTasks =>
+            prevTasks.map(task =>
+                task.id === id ? {...task, dueDate: dueDate} : task
+            )
+        )
+    }
+
     if (tasks.length === 0) {
         return (
         <div className="task-container">
@@ -54,6 +63,8 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
                         deleteTask={() => deleteTask(task.id)} 
                         completedTask={() => completedTask(task.id)}
                         updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
+                        setDueDate={(dueDate) => setDueDate(task.id, dueDate)}
+                        dueDate={task.dueDate}
                         setPriority={(priority) => setPriority(task.id, priority)}
                         priority={task.priority}
                     /> 
