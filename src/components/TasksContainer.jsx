@@ -22,6 +22,14 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
         )
     }
 
+    const setPriority = (id, priority) => {
+        setTasks(prevTasks =>
+            prevTasks.map(task =>
+                task.id === id ? {...task, priority: priority} : task
+            )
+        )
+    }
+
     if (tasks.length === 0) {
         return (
         <div className="task-container">
@@ -46,6 +54,7 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
                         deleteTask={() => deleteTask(task.id)} 
                         completedTask={() => completedTask(task.id)}
                         updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
+                        setPriority={(priority) => setPriority(task.id, priority)}
                     /> 
                 ))}
             </ul>

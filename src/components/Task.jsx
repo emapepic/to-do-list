@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MoreOptions from "./MoreOptions";
 
-export default function Task ({taskDesc, deleteTask, completedTask, checked, updateTask}) {
+export default function Task ({taskDesc, deleteTask, completedTask, checked, updateTask, setPriority}) {
     const [editOn, setEditOn] = useState(false);
     const [newTaskDesc, setNewTaskDesc] = useState();
 
@@ -24,7 +24,7 @@ export default function Task ({taskDesc, deleteTask, completedTask, checked, upd
                 {editOn && <button className="save-btn" onClick={saveTask}>Save</button>}
                 {!editOn && <button className="edit-btn" onClick={editTask}>Edit</button>}               
                 <button className="delete-btn" onClick={deleteTask}>Delete</button>
-                <MoreOptions />             
+                <MoreOptions setPriority={setPriority} />             
             </div>
         </li>
     );

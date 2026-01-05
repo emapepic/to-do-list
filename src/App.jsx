@@ -23,7 +23,7 @@ function App() {
     // da se u niz postojecih taskova doda novi task koji je unesen u input polje
     if(inputValue!='') {
       setTasks(prevTasks => [...prevTasks, 
-              {id: crypto.randomUUID(), text: inputValue, completed: false}]); // svaka stavka je objekat koji sadrzi id, tekst i podatak da li je completed ili ne
+              {id: crypto.randomUUID(), text: inputValue, completed: false, priority: null}]); // svaka stavka je objekat koji sadrzi id, tekst i podatak da li je completed ili ne
               // crypto.randomUUID generise jedinstveni id
       setInputValue('');
       setShowInputFields(false);
