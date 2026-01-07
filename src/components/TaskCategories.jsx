@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TaskContext } from "./TaskContext";
 
 export default function TaskCategories({onClose}) {
     const [categories, setCategories] = useState([]);
     const [newCategory, setNewCategory] = useState('');
+    const {setCategory, activeTaskId} = useContext(TaskContext);
 
     const addCategory = () => {
         setCategories(prevCategories => [...prevCategories, newCategory]);
@@ -16,7 +18,7 @@ export default function TaskCategories({onClose}) {
                 <div className="categories-wrapper">
                     {categories.length>0 && (
                         categories.map((category, index) => 
-                            <button className="categories" key={index}>{category}</button>
+                            <button className="categories" key={index} onClick={() => setCategory(activeTaskId, category)}>{category}</button>
                         )
                     )}
                 </div>
@@ -25,7 +27,7 @@ export default function TaskCategories({onClose}) {
                     <button className="add-btn" onClick={addCategory}>Add</button>
                 </div>
                 <div className="close-btn-wrapper">
-                    <button className="close-btn">Close</button>
+                    <button className="close-btn" onClick={onClose}>Close</button>
                 </div>
             </div>
         </div>

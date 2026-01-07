@@ -1,15 +1,20 @@
 import { useState } from "react";
 import TaskCategories from "./TaskCategories";
 
-export default function MoreOptions({setPriority, setDueDate, dueDate}) {
+export default function MoreOptions({setPriority, setDueDate, dueDate, setActiveTaskId}) {
     const [isOpen, setIsOpen] = useState(false);
     const [showPriority, setShowPriority] = useState(false);
     const [datePicker, setDatePicker] = useState(false);
     const [showCategoryModal, setShowCategoryModal] = useState(false);
 
+    const openDropdown = () => {
+        setActiveTaskId();
+        setIsOpen(prev => !prev);
+    }
+
     return (
         <div className="dropdown-wrapper">
-            <button className="more-options" onClick={() => setIsOpen(prev => !prev)}>⋮</button>
+            <button className="more-options" onClick={openDropdown}>⋮</button>
             {isOpen &&
                 <ul className="dropdown">
                     <li onClick={() => setDatePicker(true)}>
@@ -32,7 +37,7 @@ export default function MoreOptions({setPriority, setDueDate, dueDate}) {
                     </li>
                 </ul>
             }
-            {showCategoryModal && (<TaskCategories onClose={() => setShowCategoryModal(false)} />)}
+            {showCategoryModal && (<TaskCategories onClose={() => setShowCategoryModal(false)}/>)}
         </div>
     );
 }

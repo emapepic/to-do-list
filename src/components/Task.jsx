@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import MoreOptions from "./MoreOptions";
+import { TaskContext } from "./TaskContext";
 
 export default function Task ({task, deleteTask, completedTask, updateTask, setPriority, setDueDate}) {
     const [editOn, setEditOn] = useState(false);
     const [newTaskDesc, setNewTaskDesc] = useState();
+    const {setActiveTaskId} = useContext(TaskContext);
 
     const editTask = () => {
         setNewTaskDesc(task.text);
@@ -28,7 +30,7 @@ export default function Task ({task, deleteTask, completedTask, updateTask, setP
                 {editOn && <button className="save-btn" onClick={saveTask}>Save</button>}
                 {!editOn && <button className="edit-btn" onClick={editTask}>Edit</button>}               
                 <button className="delete-btn" onClick={deleteTask}>Delete</button>
-                <MoreOptions setPriority={setPriority} setDueDate={setDueDate} dueDate={task.dueDate} />             
+                <MoreOptions setPriority={setPriority} setDueDate={setDueDate} dueDate={task.dueDate} setActiveTaskId={() => setActiveTaskId(task.id)} />             
             </div>
         </li>
     );

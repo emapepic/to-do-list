@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import Task from './Task.jsx';
+import { TaskContext } from './TaskContext.jsx';
 
 export default function TasksContainer({tasks, setTasks, filter}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
     // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
-    console.log(tasks);
+    const [activeTaskId, setActiveTaskId] = useState(null);
     const deleteTask = (id) => {
         setTasks(prevTasks => prevTasks.filter(task => task.id !== id)); 
     }
@@ -39,6 +41,14 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
         )
     }
 
+    const setCategory = (id, category) => {
+        setTasks(prevTasks =>
+            prevTasks.map(task =>
+                task.id === id ? {...task, category: category} : task
+            )
+        )
+    }
+
     if (tasks.length === 0) {
         return (
         <div className="task-container">
@@ -52,21 +62,24 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
     const sortedTasks = [...tasks].sort((a, b) => a.completed - b.completed);
 
     return (
-        <div className='task-container'>
-            <ul>
-                {/* komponenti se prosledjuje niz taskova pa koristimo map da svaki task unesemo kao element liste */}
-                {sortedTasks.map((task) => ( // za svaki task u nizu se pravi komponenta Task
-                    <Task 
-                        key={task.id}
-                        task={task}
-                        deleteTask={() => deleteTask(task.id)} 
-                        completedTask={() => completedTask(task.id)}
-                        updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
-                        setDueDate={(dueDate) => setDueDate(task.id, dueDate)}
-                        setPriority={(priority) => setPriority(task.id, priority)}
-                    /> 
-                ))}
-            </ul>
-        </div>
+        <TaskContext.Provider value={{setCategory, activeTaskId, setActiveTaskId}}>
+            <div className='task-container'>
+                <ul>
+                    {/* komponenti se prosledjuje niz taskova pa koristimo map da svaki task unesemo kao element liste */}
+                    {sortedTasks.map((task) => ( // za svaki task u nizu se pravi komponenta Task
+                        <Task 
+                            key={task.id}
+                            task={task}
+                            deleteTask={() => deleteTask(task.id)} 
+                            completedTask={() => completedTask(task.id)}
+                            updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
+                            setDueDate={(dueDate) => setDueDate(task.id, dueDate)}
+                            setPriority={(priority) => setPriority(task.id, priority)}
+                            setCategory={(category) => setCategory(task.id, category)}
+                        /> 
+                    ))}
+                </ul>             
+            </div>
+        </TaskContext.Provider>
     );
 }
