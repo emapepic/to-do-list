@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { TaskContext } from "./TaskContext";
+import { TaskContext, CategoryContext } from "./TaskContext";
 
 export default function TaskCategories({onClose}) {
     const [categories, setCategories] = useState(() => {
@@ -9,8 +9,11 @@ export default function TaskCategories({onClose}) {
     useEffect(() => {
         localStorage.setItem('categories', JSON.stringify(categories));
     }, [categories]);
+    
     const [newCategory, setNewCategory] = useState('');
+
     const {setCategory, activeTaskId} = useContext(TaskContext);
+    const {activeCategory} = useContext(CategoryContext);
 
     const addCategory = () => {
         setCategories(prevCategories => [...prevCategories, newCategory]);
@@ -24,7 +27,14 @@ export default function TaskCategories({onClose}) {
                 <div className="categories-wrapper">
                     {categories.length>0 && (
                         categories.map((category, index) => 
-                            <button className="categories" key={index} onClick={() => setCategory(activeTaskId, category)}>{category}</button>
+                            <button
+                                key={index}
+                                className={category===activeCategory ? 'categories category-active' : 'categories'}
+                                onClick={() => setCategory(activeTaskId, category)}
+                                disabled={category===activeCategory}
+                            >
+                                {category}
+                            </button>
                         )
                     )}
                 </div>
