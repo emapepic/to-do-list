@@ -20,7 +20,7 @@ export default function MoreOptions({setPriority, setDueDate, dueDate, setActive
                     <li onClick={() => setDatePicker(true)}>
                         Set due date
                     </li>
-                    {datePicker && (<input type='date' value={dueDate} onChange={(e) => {setDueDate(e.target.value); setDatePicker(false);}} />)}
+                    {datePicker && (<input type='date' value={dueDate} onChange={(e) => {setDueDate(e.target.value);}} />)}
                     <li className="dropdown-wrapper" onClick={() => setShowPriority(true)} onMouseLeave={() => setShowPriority(false)}>
                         Set priority
                         {showPriority && (
