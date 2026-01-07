@@ -3,6 +3,7 @@ import Header from './components/Header.jsx';
 import InputFields from './components/InputFields.jsx';
 import TasksContainer from './components/TasksContainer.jsx';
 import FilterButtons from './components/FilterButtons.jsx';
+import sortIcon from './assets/sort-icon.svg';
 
 function App() {
   const [showInputFields, setShowInputFields] = useState(false);
@@ -13,8 +14,15 @@ function App() {
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
+  
+  // niz task se cuva u localStorage kad dodje do njegove promjene
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   const [inputValue, setInputValue] = useState('');
   const [filter, setFilter] = useState('All');
+  const [sortOrderAsc, setSortOrderAsc] = useState(null);
 
   function showInputField() {
     setShowInputFields(true);
@@ -33,10 +41,18 @@ function App() {
     else setErrorMsg(true);
   }
 
-  // niz task se cuva u localStorage kad dodje do njegove promjene
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+  function sortTasks() {
+    const sorted = [...tasks].sort((a, b) => {  
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);  
+
+      if (sortOrderAsc === null) return dateA - dateB;
+      return sortOrderAsc ? dateA - dateB : dateB - dateA;
+    });
+
+    setTasks(sorted);
+    setSortOrderAsc(prev => (prev === null ? true : !prev));
+  }
 
   const filteredTasks = tasks.filter(task => {
     if (filter === 'Active') {
@@ -54,7 +70,10 @@ function App() {
       <div className='main-container'>
         <div className='tasks-header'>
           <FilterButtons filter={filter} setFilter={setFilter} />
-          {filteredTasks.length > 0 && (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
+          <div className='tasks-header-btns'>
+            <button className='icon' onClick={sortTasks}><img src={sortIcon} /></button>
+            {filteredTasks.length > 0 && (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
+          </div>
         </div>
         {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} filter={filter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
