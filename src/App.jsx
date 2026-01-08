@@ -109,7 +109,7 @@ function App() {
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
         {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask} errorMsg={errorMsg} />}
-        <button className='add-btn' onClick={showInputField}>Add task</button>
+        <div className='add-btn-wrapper'><button className='add-btn' onClick={showInputField}>Add task</button></div>
       </div>
     </>
   )

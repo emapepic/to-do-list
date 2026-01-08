@@ -43,6 +43,11 @@ button {
   margin-top: 10px;
 }
 
+.add-btn-wrapper {
+  width: 80vw;
+  margin: 0 auto;
+}
+
 .add-btn:hover, .edit-btn:hover, .close-btn:hover {
   background-color: #435a77;
 }
@@ -71,11 +76,11 @@ button {
 }
 
 .task-container {
+  position: relative;
   background-color: whitesmoke;
   padding: 10px;
-  width: 70vw;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  width: 80vw;
+  margin: 1rem auto;
 }
 
 .task-container ul {
@@ -168,8 +173,9 @@ input[type="date"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 70vw;
+  width: 80vw;
   color: whitesmoke;
+  margin: 0 auto;
 }
 
 .tasks-header-btns {
