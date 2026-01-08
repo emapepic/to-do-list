@@ -309,3 +309,8 @@ input[type="date"] {
   background-color: transparent;
   box-shadow: none;
 }
+
+#search-bar {
+  padding-left: 0.2rem;
+  background: whitesmoke;
+}

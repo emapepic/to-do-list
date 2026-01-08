@@ -28,6 +28,7 @@ function App() {
     priority: 'all',
     category: 'all'
   });
+  const [searchingTasks, setSearchingTasks] = useState('');
 
   function showInputField() {
     setShowInputFields(true);
@@ -69,11 +70,17 @@ function App() {
     return true;
   });
 
-  const filteredTasks = filteredByStatus.filter(task => {
+  const filteredTasks = filteredByStatus
+  // za filter
+  .filter(task => {
     const byPriority = filters.priority === 'all' || task.priority === filters.priority;
     const byCategory = filters.category === 'all' || task.category === filters.category;
 
     return byPriority && byCategory;
+  })
+  // za search
+  .filter(task => {
+    return task.text.toLowerCase().includes(searchingTasks.toLowerCase())
   });
 
   function onRemoveFilter(filterType) {
@@ -95,6 +102,13 @@ function App() {
         <div className='tasks-header'>
           <FilterButtons filter={statusFilter} setFilter={setStatusFilter} />
           <div className='tasks-header-btns'>
+            <input
+              id='search-bar'
+              type='text'
+              placeholder='Search tasks'
+              value={searchingTasks}
+              onChange={(e) => setSearchingTasks(e.target.value)}
+            />
             {filters.priority !== 'all' && <span className='active-filter'>{filters.priority} <span onClick={() => onRemoveFilter('priority')}>x</span></span>}
             {filters.category !== 'all' && <span className='active-filter'>{filters.category} <span onClick={() => onRemoveFilter('category')}>x</span></span>}
             <button className='icon' onClick={sortTasks}><img src={sortIcon} /></button>
@@ -105,7 +119,7 @@ function App() {
             {filteredTasks.length > 0 && (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
           </div>
         </div>
-        {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} statusFilter={statusFilter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
+        {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
         {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask} errorMsg={errorMsg} />}
