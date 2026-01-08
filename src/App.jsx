@@ -4,6 +4,7 @@ import InputFields from './components/InputFields.jsx';
 import TasksContainer from './components/TasksContainer.jsx';
 import FilterButtons from './components/FilterButtons.jsx';
 import sortIcon from './assets/sort-icon.svg';
+import FilterCategories from './components/FilterCategories.jsx';
 
 function App() {
   const [showInputFields, setShowInputFields] = useState(false);
@@ -21,8 +22,12 @@ function App() {
   }, [tasks]);
 
   const [inputValue, setInputValue] = useState('');
-  const [filter, setFilter] = useState('All');
+  const [statusFilter, setStatusFilter] = useState('All');
   const [sortOrderAsc, setSortOrderAsc] = useState(null);
+  const [filters, setFilters] = useState({
+    priority: 'all',
+    category: 'all'
+  });
 
   function showInputField() {
     setShowInputFields(true);
@@ -54,28 +59,53 @@ function App() {
     setSortOrderAsc(prev => (prev === null ? true : !prev));
   }
 
-  const filteredTasks = tasks.filter(task => {
-    if (filter === 'Active') {
+  const filteredByStatus = tasks.filter(task => {
+    if (statusFilter === 'Active') {
       return !task.completed;
     }
-    if (filter === 'Finished') {
+    if (statusFilter === 'Finished') {
       return task.completed;
     }
     return true;
   });
 
+  const filteredTasks = filteredByStatus.filter(task => {
+    const byPriority = filters.priority === 'all' || task.priority === filters.priority;
+    const byCategory = filters.category === 'all' || task.category === filters.category;
+
+    return byPriority && byCategory;
+  });
+
+  function onRemoveFilter(filterType) {
+    setFilters(prev => {
+      if (filterType === 'priority') {
+        return {...prev, priority: 'all'};
+      }
+
+      if (filterType === 'category') {
+        return {...prev, category: 'all'};
+      }
+    })
+  }
+  
   return (
     <>
-      <Header/>      
+      <Header />
       <div className='main-container'>
         <div className='tasks-header'>
-          <FilterButtons filter={filter} setFilter={setFilter} />
+          <FilterButtons filter={statusFilter} setFilter={setStatusFilter} />
           <div className='tasks-header-btns'>
+            {filters.priority !== 'all' && <span className='active-filter'>{filters.priority} <span onClick={() => onRemoveFilter('priority')}>x</span></span>}
+            {filters.category !== 'all' && <span className='active-filter'>{filters.category} <span onClick={() => onRemoveFilter('category')}>x</span></span>}
             <button className='icon' onClick={sortTasks}><img src={sortIcon} /></button>
+            <FilterCategories
+              setFilters={setFilters}
+              categories={[...new Set(tasks.map(task => task.category))]}
+            />
             {filteredTasks.length > 0 && (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
           </div>
         </div>
-        {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} filter={filter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
+        {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} statusFilter={statusFilter} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
         {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask} errorMsg={errorMsg} />}

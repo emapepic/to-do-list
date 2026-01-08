@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Task from './Task.jsx';
 import { TaskContext } from './TaskContext.jsx';
 
-export default function TasksContainer({tasks, setTasks, filter}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
+export default function TasksContainer({tasks, setTasks, statusFilter}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
     // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
     const [activeTaskId, setActiveTaskId] = useState(null);
     const deleteTask = (id) => {
@@ -52,7 +52,7 @@ export default function TasksContainer({tasks, setTasks, filter}) {  // prosledj
     if (tasks.length === 0) {
         return (
         <div className="task-container">
-            <p>No {filter.toLowerCase()} tasks found</p>
+            <p>No {statusFilter.toLowerCase()} tasks found</p>
         </div>
         );
     }

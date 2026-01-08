@@ -260,10 +260,22 @@ input[type="date"] {
   color: #2c2c2c;
 }
 
-.category {
+.category, .active-filter {
   padding: 0.4rem;
   border-radius: 5px;
   border: 1px outset #b682b6;
+}
+
+.active-filter {
+  padding: 0.2rem;
+  background-color: #7da8dc;
+  color: #2c2c2c;
+  opacity: 0.8;
+}
+
+.active-filter span {
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .categories:hover {
