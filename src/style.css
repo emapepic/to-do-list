@@ -199,8 +199,11 @@ input[type="date"] {
 }
 
 .active-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.2rem;
-  background-color: #7da8dc;
+  background-color: #84d9dc;
   color: #2c2c2c;
   opacity: 0.8;
 }
@@ -288,18 +291,18 @@ input[type="date"] {
 }
 
 .categories, .category {
-  background-color: plum;
+  background-color: cadetblue;
   color: #2c2c2c;
 }
 
 .category, .active-filter {
   padding: 0.4rem;
   border-radius: 5px;
-  border: 1px outset #b682b6;
+  border: 1px outset #4b7c7e;
 }
 
 .categories:hover {
-  background-color: #b682b6;
+  background-color: #4b7c7e;
 }
 
 .category-active {
@@ -308,7 +311,7 @@ input[type="date"] {
 }
 
 .category-active:hover {
-  background-color: plum;
+  background-color: cadetblue;
 }
 
 .icon {
