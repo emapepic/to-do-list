@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { TaskContext, CategoryContext } from "./TaskContext";
 
-export default function TaskCategories({onClose}) {
+export default function TaskCategories({onClose, setIsOpen}) {
     const [categories, setCategories] = useState(() => {
         const savedCategories = localStorage.getItem('categories');
         return savedCategories ? JSON.parse(savedCategories) : [];
@@ -30,7 +30,7 @@ export default function TaskCategories({onClose}) {
                             <button
                                 key={index}
                                 className={category===activeCategory ? 'categories category-active' : 'categories'}
-                                onClick={() => setCategory(activeTaskId, category)}
+                                onClick={() => {setCategory(activeTaskId, category); setIsOpen(false)}}
                                 disabled={category===activeCategory}>
                                     {category}
                             </button>

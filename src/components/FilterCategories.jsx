@@ -14,7 +14,7 @@ export default function FilterCategories({setFilters, categories}) {
                 <img src={filterIcon} />
             </button>
             {isOpen &&
-                <ul className="dropdown">
+                <ul className="dropdown dropdown-filter">
                     <li 
                         className="dropdown-wrapper"
                         onClick={() => setShowPriorities(true)}
@@ -23,19 +23,31 @@ export default function FilterCategories({setFilters, categories}) {
                             {showPriorities && (
                                 <ul className="dropdown">
                                     <li
-                                        onClick={() => setFilters(filter => ({...filter, priority: 'all'}))}>
+                                        onClick={() => {
+                                            setFilters(filter => ({...filter, priority: 'all'}));
+                                            setIsOpen(false)
+                                        }}>
                                             All
                                     </li>
                                     <li
-                                        onClick={() => setFilters(filter => ({...filter, priority: 'low'}))}>
+                                        onClick={() => {
+                                            setFilters(filter => ({...filter, priority: 'low'}));
+                                            setIsOpen(false)
+                                        }}>
                                             Low
                                     </li>
                                     <li
-                                        onClick={() => setFilters(filter => ({...filter, priority: 'medium'}))}>
+                                        onClick={() => {
+                                            setFilters(filter => ({...filter, priority: 'medium'}));
+                                            setIsOpen(false)
+                                        }}>
                                             Medium
                                     </li>
                                     <li
-                                        onClick={() => setFilters(filter => ({...filter, priority: 'high'}))}>
+                                        onClick={() => {
+                                            setFilters(filter => ({...filter, priority: 'high'}));
+                                            setIsOpen(false)
+                                        }}>
                                             High
                                     </li>
                                 </ul>
@@ -49,11 +61,19 @@ export default function FilterCategories({setFilters, categories}) {
                             By category
                             {showCategories && (
                                 <ul className="dropdown">
-                                    <li onClick={() => setFilters(filter => ({...filter, category: 'all'}))}>All</li>
+                                    <li onClick={() => {
+                                            setFilters(filter => ({...filter, category: 'all'}));
+                                            setIsOpen(false)
+                                        }}>
+                                            All
+                                    </li>
                                     {categories.map(category => 
                                         <li 
                                             key={category}
-                                            onClick={() => setFilters(filter => ({...filter, category}))}>
+                                            onClick={() => {
+                                            setFilters(filter => ({...filter, category}));
+                                            setIsOpen(false)
+                                        }}>
                                                 {category}
                                         </li>
                                     )}

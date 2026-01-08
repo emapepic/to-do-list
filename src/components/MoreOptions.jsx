@@ -20,26 +20,50 @@ export default function MoreOptions({setPriority, setDueDate, dueDate, setActive
                     <li onClick={() => setDatePicker(true)}>
                         Set due date
                     </li>
-                    {datePicker && (<input type='date' value={dueDate} onChange={(e) => {setDueDate(e.target.value);}} />)}
+                    {datePicker && 
+                        (<input 
+                            type='date' 
+                            value={dueDate} 
+                            onChange={(e) => setDueDate(e.target.value)} 
+                        />)}
                     <li className="dropdown-wrapper" 
                         onClick={() => setShowPriority(true)} 
                         onMouseLeave={() => setShowPriority(false)}>
                             Set priority
                             {showPriority && (
                                 <ul className="dropdown">
-                                    <li onClick={() => setPriority('low')}>Low</li>
-                                    <li onClick={() => setPriority('medium')}>Medium</li>
-                                    <li onClick={() => setPriority('high')}>High</li>
+                                    <li onClick={() => 
+                                        {setPriority('low');
+                                        setIsOpen(false);
+                                        }}>
+                                            Low
+                                    </li>
+                                    <li onClick={() => 
+                                        {setPriority('medium');
+                                        setIsOpen(false);
+                                        }}>
+                                            Medium
+                                    </li>
+                                    <li onClick={() => 
+                                        {setPriority('high');
+                                        setIsOpen(false);
+                                        }}>
+                                            High
+                                    </li>
                                 </ul>
                                 )
                             }
                     </li>
-                    <li onClick={() => setShowCategoryModal(true)}>
+                    <li onClick={() => {setShowCategoryModal(true); setIsOpen(false)}}>
                         Set category
                     </li>
                 </ul>
             }
-            {showCategoryModal && (<TaskCategories onClose={() => setShowCategoryModal(false)}/>)}
+            {showCategoryModal && 
+                (<TaskCategories 
+                    onClose={() => setShowCategoryModal(false)}
+                    setIsOpen={setShowCategoryModal}
+                />)}
         </div>
     );
 }

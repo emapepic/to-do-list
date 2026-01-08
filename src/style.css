@@ -238,6 +238,10 @@ input[type="date"] {
   color: whitesmoke;
 }
 
+.dropdown-filter li {
+  padding: 5px;
+}
+
 /* priorities */
 .priority-low {
   color: #3e8173;
