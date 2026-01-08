@@ -3,8 +3,8 @@ import Header from './components/Header.jsx';
 import InputFields from './components/InputFields.jsx';
 import TasksContainer from './components/TasksContainer.jsx';
 import FilterButtons from './components/FilterButtons.jsx';
-import sortIcon from './assets/sort-icon.svg';
 import FilterCategories from './components/FilterCategories.jsx';
+import sortIcon from './assets/sort-icon.svg';
 
 function App() {
   const [showInputFields, setShowInputFields] = useState(false);
@@ -15,11 +15,6 @@ function App() {
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
-  
-  // niz task se cuva u localStorage kad dodje do njegove promjene
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
 
   const [inputValue, setInputValue] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
@@ -30,6 +25,11 @@ function App() {
   });
   const [searchingTasks, setSearchingTasks] = useState('');
 
+  // niz task se cuva u localStorage kad dodje do njegove promjene
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   function showInputField() {
     setShowInputFields(true);
   }
@@ -38,8 +38,12 @@ function App() {
     // da se u niz postojecih taskova doda novi task koji je unesen u input polje
     if(inputValue.trim()!='') {
       setTasks(prevTasks => [...prevTasks, 
-              {id: crypto.randomUUID(), text: inputValue, completed: false, dueDate: null, priority: null, category: null}]);
-              // crypto.randomUUID generise jedinstveni id
+              {id: crypto.randomUUID(), // crypto.randomUUID generise jedinstveni id
+               text: inputValue, 
+               completed: false, 
+               dueDate: null, 
+               priority: null, 
+               category: null}]);           
       setInputValue('');
       setShowInputFields(false);
       setErrorMsg(false)
@@ -109,21 +113,48 @@ function App() {
               value={searchingTasks}
               onChange={(e) => setSearchingTasks(e.target.value)}
             />
-            {filters.priority !== 'all' && <span className='active-filter'>{filters.priority} <span onClick={() => onRemoveFilter('priority')}>x</span></span>}
-            {filters.category !== 'all' && <span className='active-filter'>{filters.category} <span onClick={() => onRemoveFilter('category')}>x</span></span>}
+            {filters.priority !== 'all' && 
+              <span className='active-filter'>
+                {filters.priority} 
+                <span onClick={() => onRemoveFilter('priority')}>
+                  x
+                </span>
+              </span>}
+            {filters.category !== 'all' && 
+              <span className='active-filter'>
+                {filters.category} 
+                <span onClick={() => onRemoveFilter('category')}>
+                  x
+                </span>
+              </span>}
             <button className='icon' onClick={sortTasks}><img src={sortIcon} /></button>
             <FilterCategories
               setFilters={setFilters}
               categories={[...new Set(tasks.map(task => task.category))]}
             />
-            {filteredTasks.length > 0 && (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
+            {filteredTasks.length > 0 && 
+              (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
           </div>
         </div>
-        {tasks.length > 0 ? <TasksContainer tasks={filteredTasks} setTasks={setTasks} /> : <p style={{color: 'whitesmoke'}}>There's no tasks to complete, create new ones 🙂</p> }
+        {tasks.length > 0 ? 
+          <TasksContainer tasks={filteredTasks} setTasks={setTasks} /> : 
+          <p style={{color: 'whitesmoke'}}>
+            There's no tasks to complete, create new ones 🙂
+          </p>
+        }
         {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
           tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
-        {showInputFields && <InputFields inputValue={inputValue} setInput={(e) => setInputValue(e.target.value)} addTask={addTask} errorMsg={errorMsg} />}
-        <div className='add-btn-wrapper'><button className='add-btn' onClick={showInputField}>Add task</button></div>
+        {showInputFields && 
+          <InputFields 
+            inputValue={inputValue}
+            setInput={(e) => setInputValue(e.target.value)}
+            addTask={addTask}
+            errorMsg={errorMsg} 
+          />
+        }
+        <div className='add-btn-wrapper'>
+          <button className='add-btn' onClick={showInputField}>Add task</button>
+        </div>
       </div>
     </>
   )

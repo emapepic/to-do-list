@@ -6,14 +6,14 @@ export default function TaskCategories({onClose}) {
         const savedCategories = localStorage.getItem('categories');
         return savedCategories ? JSON.parse(savedCategories) : [];
     });
+    
+    const [newCategory, setNewCategory] = useState('');
+    const {setCategory, activeTaskId} = useContext(TaskContext);
+    const {activeCategory} = useContext(CategoryContext);
+
     useEffect(() => {
         localStorage.setItem('categories', JSON.stringify(categories));
     }, [categories]);
-    
-    const [newCategory, setNewCategory] = useState('');
-
-    const {setCategory, activeTaskId} = useContext(TaskContext);
-    const {activeCategory} = useContext(CategoryContext);
 
     const addCategory = () => {
         setCategories(prevCategories => [...prevCategories, newCategory]);
@@ -31,15 +31,18 @@ export default function TaskCategories({onClose}) {
                                 key={index}
                                 className={category===activeCategory ? 'categories category-active' : 'categories'}
                                 onClick={() => setCategory(activeTaskId, category)}
-                                disabled={category===activeCategory}
-                            >
-                                {category}
+                                disabled={category===activeCategory}>
+                                    {category}
                             </button>
                         )
                     )}
                 </div>
                 <div className="input-container">
-                    <input type="text" value={newCategory} placeholder="Add new category" onChange={(e) => setNewCategory(e.target.value)} />
+                    <input 
+                        type="text" 
+                        value={newCategory} 
+                        placeholder="Add new category" 
+                        onChange={(e) => setNewCategory(e.target.value)} />
                     <button className="add-btn" onClick={addCategory}>Add</button>
                 </div>
                 <div className="close-btn-wrapper">

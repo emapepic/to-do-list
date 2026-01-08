@@ -5,6 +5,7 @@ import { TaskContext } from './TaskContext.jsx';
 export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
     // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
     const [activeTaskId, setActiveTaskId] = useState(null);
+    
     const deleteTask = (id) => {
         setTasks(prevTasks => prevTasks.filter(task => task.id !== id)); 
     }
