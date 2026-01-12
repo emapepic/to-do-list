@@ -130,7 +130,7 @@ function App() {
             <button className='icon' onClick={sortTasks}><img src={sortIcon} /></button>
             <FilterCategories
               setFilters={setFilters}
-              categories={[...new Set(tasks.map(task => task.category))]}
+              categories={[...new Set(tasks.map(task => task.category).filter(category => category != null))]}
             />
             {filteredTasks.length > 0 && 
               (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
