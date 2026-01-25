@@ -132,9 +132,15 @@ function App() {
               setFilters={setFilters}
               categories={[...new Set(tasks.map(task => task.category))]}
             />
-            {filteredTasks.length > 0 && 
-              (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
           </div>
+        </div>
+        <div className='btns-container'>
+          <div className='btns-wrapper'>
+            <button className='add-btn' onClick={showInputField}>Add task</button>
+            <button className=''>Categories</button>
+          </div>
+          {filteredTasks.length > 0 && 
+              (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
         </div>
         {tasks.length > 0 ? 
           <TasksContainer tasks={filteredTasks} setTasks={setTasks} /> : 
@@ -152,9 +158,6 @@ function App() {
             errorMsg={errorMsg} 
           />
         }
-        <div className='add-btn-wrapper'>
-          <button className='add-btn' onClick={showInputField}>Add task</button>
-        </div>
       </div>
     </>
   )

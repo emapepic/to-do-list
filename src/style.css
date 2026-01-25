@@ -1,7 +1,5 @@
 :root {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 16px;
-  --primary-color: #5979a1;
+  --primary-color: #3c83f6;
 }
 
 * {
@@ -12,7 +10,9 @@
 
 /* general */
 body {
-  background-color: #2c2c2c;
+  background-color: #F8FAFC;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
 }
 
 header {
@@ -28,11 +28,11 @@ h1 {
 
 button {
   color: whitesmoke;
-  padding: 5px 15px;
-  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   border-style: none;
   cursor: pointer;
-  box-shadow: 2px 2px 1px #585858;
+  /* box-shadow: 2px 2px 1px #585858; */
 }
 
 .main-container {
@@ -41,12 +41,21 @@ button {
 
 .add-btn {
   background-color: var(--primary-color);
-  margin-top: 10px;
 }
 
-.add-btn-wrapper {
+.btns-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 80vw;
-  margin: 0 auto;
+  margin: 1.5rem auto;
+}
+
+.btns-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .add-btn:hover, .edit-btn:hover, .close-btn:hover {
@@ -165,7 +174,7 @@ input[type="date"] {
   align-items: center;
   width: 80vw;
   color: whitesmoke;
-  margin: 0 auto;
+  margin: 1rem auto;
 }
 
 .tasks-header-btns {
@@ -187,6 +196,7 @@ input[type="date"] {
 
 .filters .btn {
   color: black;
+  border-radius: 12px;
 }
 
 .filters .btn:hover {
@@ -194,7 +204,7 @@ input[type="date"] {
 }
 
 .filters .btn.active {
-  background-color: #5979a1;
+  background-color: #3C83F6;
   color: whitesmoke;
 }
 
