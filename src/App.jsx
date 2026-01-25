@@ -144,7 +144,7 @@ function App() {
         </div>
         {tasks.length > 0 ? 
           <TasksContainer tasks={filteredTasks} setTasks={setTasks} /> : 
-          <p style={{color: 'whitesmoke'}}>
+          <p style={{textAlign: 'center'}}>
             There's no tasks to complete, create new ones 🙂
           </p>
         }
@@ -155,6 +155,7 @@ function App() {
             inputValue={inputValue}
             setInput={(e) => setInputValue(e.target.value)}
             addTask={addTask}
+            onClose={() => setShowInputFields(false)}
             errorMsg={errorMsg} 
           />
         }

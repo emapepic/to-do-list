@@ -27,10 +27,10 @@ h1 {
 }
 
 button {
-  color: whitesmoke;
+  color: #000;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  border-style: none;
+  border: 1px solid #b3b3b3;
   cursor: pointer;
   /* box-shadow: 2px 2px 1px #585858; */
 }
@@ -41,6 +41,8 @@ button {
 
 .add-btn {
   background-color: var(--primary-color);
+  color: whitesmoke;
+  border: none;
 }
 
 .btns-container {
@@ -64,9 +66,13 @@ button {
 
 .input-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin: 10px 0;
   gap: 10px;
+}
+
+.input-container label {
+  font-weight: 600;
 }
 
 .save-btn {
@@ -82,7 +88,28 @@ button {
 }
 
 .error-msg {
-  color: #a02424;
+  margin-top: 0.5rem;
+  color: rgb(202, 0, 0);
+  text-align: center;
+}
+
+/* new task */
+.task-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.task-options .input-container {
+  flex: 1;
+}
+
+.input-btns-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
 /* tasks container */
@@ -146,11 +173,15 @@ button {
   accent-color: var(--primary-color);
 }
 
-input[type="date"] {
+input, select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: transparent;
+}
+
+input:hover {
+  cursor: pointer;
 }
 
 .edit-btn, .close-btn {
@@ -197,6 +228,7 @@ input[type="date"] {
 .filters .btn {
   color: black;
   border-radius: 12px;
+  border: none;
 }
 
 .filters .btn:hover {
@@ -280,13 +312,20 @@ input[type="date"] {
 }
 
 .modal {
-  width: 50vw;
+  width: 35vw;
   padding: 2rem;
-  background: #b1b1b1;
+  background: whitesmoke;
+  border-radius: 10px;
 }
 
-.modal .add-btn {
-  margin-top: 0;
+.modal h1 {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.modal button {
+  margin-top: 1rem;
 }
 
 .close-btn-wrapper {
