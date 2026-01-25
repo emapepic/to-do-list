@@ -29,10 +29,10 @@ h1 {
 button {
   color: #000;
   padding: 0.5rem 1rem;
+  background-color: #F1F5F9;
   border-radius: 8px;
   border: 1px solid #b3b3b3;
   cursor: pointer;
-  /* box-shadow: 2px 2px 1px #585858; */
 }
 
 .main-container {
@@ -41,7 +41,7 @@ button {
 
 .add-btn {
   background-color: var(--primary-color);
-  color: whitesmoke;
+  color: white;
   border: none;
 }
 
@@ -58,10 +58,6 @@ button {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-}
-
-.add-btn:hover, .edit-btn:hover, .close-btn:hover {
-  background-color: #435a77;
 }
 
 .input-container {
@@ -89,7 +85,7 @@ button {
 
 .error-msg {
   margin-top: 0.5rem;
-  color: rgb(202, 0, 0);
+  color: #ca0000;
   text-align: center;
 }
 
@@ -115,20 +111,17 @@ button {
 /* tasks container */
 .task-container {
   position: relative;
-  background-color: whitesmoke;
-  padding: 10px;
   width: 80vw;
   margin: 1rem auto;
+  padding: 10px;
 }
 
-.task-container ul {
-  list-style-type: circle;
-  list-style-position: inside;
-}
-
-.task-container li {
-  padding: 5px;
-  border-bottom: 1px solid black;
+.list-items {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 20px -4px hsl(217 91% 60% / 0.08);
 }
 
 .list-items,
@@ -159,19 +152,45 @@ button {
 }
 
 .delete-btn {
-  background-color: #a02424;
+  background: transparent;
+  color: #d80000;
+  border: none;
 }
 
 .delete-btn:hover {
-  background-color: #7c1c1c;
+  background-color: #d8000028;
 }
 
-.task-btns input[type="checkbox"] {
-  cursor: pointer;
-  align-self: stretch;
+.checked-task {
+  appearance: none;
+  -webkit-appearance: none;
   width: 18px;
-  accent-color: var(--primary-color);
+  height: 18px;
+  border: 1.5px solid #888888;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
 }
+
+.checked-task::before {
+  content: "";
+  width: 10px;
+  height: 4px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg) scale(0);
+}
+
+.checked-task:checked {
+  background-color: rgb(2, 179, 2);
+  border-color: rgb(2, 179, 2);
+}
+
+.checked-task:checked::before {
+  transform: rotate(-45deg) scale(1);
+}
+
 
 input, select {
   padding: 8px;
@@ -184,8 +203,14 @@ input:hover {
   cursor: pointer;
 }
 
-.edit-btn, .close-btn {
-  background-color: var(--primary-color);
+.edit-btn {
+  background: transparent;
+  color: var(--primary-color);
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #3c83f631;
 }
 
 .more-options {
@@ -376,5 +401,5 @@ input:hover {
 
 #search-bar {
   padding-left: 0.2rem;
-  background: whitesmoke;
+  background: #F8FAFC;
 }

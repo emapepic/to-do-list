@@ -1,11 +1,9 @@
-import { useState, useContext } from "react";
-import MoreOptions from "./MoreOptions";
+import { useState } from "react";
 import { TaskContext, CategoryContext } from "./TaskContext";
 
-export default function Task ({task, deleteTask, completedTask, updateTask, setPriority, setDueDate}) {
+export default function Task ({task, deleteTask, completedTask, updateTask}) {
     const [editOn, setEditOn] = useState(false);
     const [newTaskDesc, setNewTaskDesc] = useState();
-    const {setActiveTaskId} = useContext(TaskContext);
 
     const editTask = () => {
         setNewTaskDesc(task.text);
@@ -22,6 +20,7 @@ export default function Task ({task, deleteTask, completedTask, updateTask, setP
     return (
         <CategoryContext.Provider value={{activeCategory}}>
             <li className="list-items">
+                <input className='checked-task' type="checkbox" onChange={completedTask} checked={task.completed} />
                 <div className="task-desc">
                     {editOn && 
                         <input 
@@ -37,16 +36,9 @@ export default function Task ({task, deleteTask, completedTask, updateTask, setP
                     {task.dueDate && <span>{task.dueDate}</span>}
                 </div>
                 <div className="task-btns">
-                    <input type="checkbox" onChange={completedTask} checked={task.completed} />
                     {editOn && <button className="save-btn" onClick={saveTask}>Save</button>}
                     {!editOn && <button className="edit-btn" onClick={editTask}>Edit</button>}               
-                    <button className="delete-btn" onClick={deleteTask}>Delete</button>
-                    <MoreOptions 
-                        setPriority={setPriority} 
-                        setDueDate={setDueDate} 
-                        dueDate={task.dueDate} 
-                        setActiveTaskId={() => setActiveTaskId(task.id)} 
-                    />             
+                    <button className="delete-btn" onClick={deleteTask}>Delete</button>           
                 </div>
             </li>
         </CategoryContext.Provider>
