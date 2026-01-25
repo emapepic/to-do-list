@@ -1,15 +1,15 @@
-import { useState, useContext, useEffect } from "react";
-import { TaskContext, CategoryContext } from "./TaskContext";
+import { useState, useEffect } from "react";
+// import { TaskContext, CategoryContext } from "./TaskContext";
 
-export default function TaskCategories({onClose, setIsOpen}) {
+export default function TaskCategories({onClose}) {
     const [categories, setCategories] = useState(() => {
         const savedCategories = localStorage.getItem('categories');
         return savedCategories ? JSON.parse(savedCategories) : [];
     });
     
     const [newCategory, setNewCategory] = useState('');
-    const {setCategory, activeTaskId} = useContext(TaskContext);
-    const {activeCategory} = useContext(CategoryContext);
+    // const {setCategory, activeTaskId} = useContext(TaskContext);
+    // const {activeCategory} = useContext(CategoryContext);
 
     useEffect(() => {
         localStorage.setItem('categories', JSON.stringify(categories));
@@ -29,9 +29,10 @@ export default function TaskCategories({onClose, setIsOpen}) {
                         categories.map((category, index) => 
                             <button
                                 key={index}
-                                className={category===activeCategory ? 'categories category-active' : 'categories'}
-                                onClick={() => {setCategory(activeTaskId, category); setIsOpen(false)}}
-                                disabled={category===activeCategory}>
+                                // className={category===activeCategory ? 'categories category-active' : 'categories'}
+                                // onClick={() => {setCategory(activeTaskId, category); setIsOpen(false)}}
+                                // disabled={category===activeCategory}
+                                >
                                     {category}
                             </button>
                         )

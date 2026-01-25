@@ -4,6 +4,7 @@ import InputFields from './components/InputFields.jsx';
 import TasksContainer from './components/TasksContainer.jsx';
 import FilterButtons from './components/FilterButtons.jsx';
 import FilterCategories from './components/FilterCategories.jsx';
+import TaskCategories from './components/TaskCategories.jsx';
 import sortIcon from './assets/sort-icon.svg';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     category: 'all'
   });
   const [searchingTasks, setSearchingTasks] = useState('');
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
 
   // niz task se cuva u localStorage kad dodje do njegove promjene
   useEffect(() => {
@@ -32,6 +34,10 @@ function App() {
 
   function showInputField() {
     setShowInputFields(true);
+  }
+
+  function showCategoriesModal() {
+    setShowCategoryModal(true);
   }
 
   function addTask() {
@@ -137,7 +143,7 @@ function App() {
         <div className='btns-container'>
           <div className='btns-wrapper'>
             <button className='add-btn' onClick={showInputField}>Add task</button>
-            <button className=''>Categories</button>
+            <button onClick={showCategoriesModal}>Categories</button>
           </div>
           {filteredTasks.length > 0 && 
               (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
@@ -158,6 +164,12 @@ function App() {
             onClose={() => setShowInputFields(false)}
             errorMsg={errorMsg} 
           />
+        }
+        {showCategoryModal && 
+          (<TaskCategories 
+            onClose={() => setShowCategoryModal(false)}
+            // setIsOpen={setShowCategoryModal}
+            />)
         }
       </div>
     </>
