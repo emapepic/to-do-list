@@ -117,6 +117,7 @@ button {
 }
 
 .list-items {
+  margin-bottom: 0.5rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 12px;
@@ -132,13 +133,20 @@ button {
   gap: 20px;
 }
 
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .task-desc,
 .task-more-info {
   width: 100%;
 }
 
 .task-more-info {
-  justify-content: flex-end;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .completed-list-item {
@@ -149,6 +157,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
 }
 
 .delete-btn {
@@ -310,16 +319,27 @@ input:hover {
 }
 
 /* priorities */
+.priority, .category {
+  padding: 0.2rem 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: 20px;
+}
+
 .priority-low {
-  color: #3e8173;
+  background-color: #16a24933;
+  color: #16A249;
 }
 
 .priority-medium {
-  color: #b2b25c;
+  background-color: #c47f0826;
+  color: #C47F08;
 }
 
 .priority-high {
-  color: #a02424;
+  background-color: #f04a4a2f;
+  color: #F04A4A;
 }
 
 /* modal */
@@ -368,15 +388,9 @@ input:hover {
   margin: 1rem;
 }
 
-.categories, .category {
-  background-color: cadetblue;
-  color: #2c2c2c;
-}
-
-.category, .active-filter {
-  padding: 0.4rem;
-  border-radius: 5px;
-  border: 1px outset #4b7c7e;
+.category {
+  background-color: #619bf73b;
+  color: #3E84F6;
 }
 
 .categories:hover {
@@ -390,6 +404,12 @@ input:hover {
 
 .category-active:hover {
   background-color: cadetblue;
+}
+
+/* due date */
+.due-date {
+  font-size: 12px;
+  color: #828282;
 }
 
 .icon {
