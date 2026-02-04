@@ -1,12 +1,18 @@
-export default function InputFields({inputValue, 
+import { useState } from "react";
+
+export default function InputFields({
+  inputValue, 
   setInput, 
   addTask, 
   onClose, 
-  errorMsg, 
-  priority, 
-  setPriority,
+  errorMsg,
   categories
 }) {
+
+  const [priority, setPriority] = useState('');
+  const [category, setCategory] = useState('');
+  const [dueDate, setDueDate] = useState('');
+
   return (
     <div className='modal-overlay'>
       <div className='modal new-task'>
@@ -18,7 +24,7 @@ export default function InputFields({inputValue,
           <div className='task-options'>
             <div className='input-container'>
               <label>Priority</label>
-              <select value={priority} onChange={e => setPriority(e.target.value)}>
+              <select value={priority} onChange={(e) => setPriority(e.target.value)}>
                 <option value='low'>Low</option>
                 <option value='medium'>Medium</option>
                 <option value='high'>High</option>
@@ -26,7 +32,7 @@ export default function InputFields({inputValue,
             </div>
             <div className='input-container'>
               <label>Category</label>
-              <select>
+              <select value={category} onChange={(e) => setCategory(e.target.value)}>
                 {categories.map((category, index) =>
                   <option key={index}>{category}</option> 
                 )}
@@ -35,11 +41,11 @@ export default function InputFields({inputValue,
           </div>
           <div className='input-container'>
             <label>Due date</label>
-            <input type='date' />
+            <input type='date' value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
           </div>
           <div className='input-btns-container'>
             <button onClick={onClose}>Cancel</button>
-            <button className='add-btn' onClick={addTask}>Add task</button>
+            <button className='add-btn' onClick={() => addTask(dueDate, priority, category)}>Add task</button>
           </div>
           {errorMsg && <p className="error-msg">You can't save an empty task.</p>}
       </div>

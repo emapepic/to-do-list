@@ -45,16 +45,16 @@ function App() {
     setShowCategoryModal(true);
   }
 
-  function addTask() {
+  function addTask(dueDateInput, priorityInput, categoryInput) {
     // da se u niz postojecih taskova doda novi task koji je unesen u input polje
     if(inputValue.trim()!='') {
       setTasks(prevTasks => [...prevTasks, 
               {id: crypto.randomUUID(), // crypto.randomUUID generise jedinstveni id
                text: inputValue, 
                completed: false, 
-               dueDate: null, 
-               priority: null, 
-               category: null}]);           
+               dueDate: dueDateInput ?? null, 
+               priority: priorityInput ?? null, 
+               category: categoryInput ?? null}]);           
       setInputValue('');
       setShowInputFields(false);
       setErrorMsg(false)
@@ -166,6 +166,7 @@ function App() {
             inputValue={inputValue}
             setInput={(e) => setInputValue(e.target.value)}
             addTask={addTask}
+            tasks={tasks}
             onClose={() => setShowInputFields(false)}
             errorMsg={errorMsg}
             categories={categories} 
