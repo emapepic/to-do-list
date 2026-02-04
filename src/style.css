@@ -373,10 +373,11 @@ input:hover {
   margin-top: 1rem;
 }
 
-.close-btn-wrapper {
-  margin: 1rem;
-  margin-bottom: 0;
-  text-align: center;
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 /* categories */
@@ -404,6 +405,17 @@ input:hover {
 
 .category-active:hover {
   background-color: cadetblue;
+}
+
+.add-category {
+  width: 5rem;
+  margin: 0 auto;
+}
+
+.close-btn {
+  margin-top: 0 !important;
+  padding: 0;
+  border: none;
 }
 
 /* due date */

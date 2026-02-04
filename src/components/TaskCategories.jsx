@@ -20,10 +20,17 @@ export default function TaskCategories({onClose}) {
         setNewCategory('');
     }
 
+    const deleteCategory = (index) => {
+        setCategories(prevCategories => prevCategories.filter((_, i) => i !== index))
+    }
+
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <h3>Task categories</h3>
+                <div className="modal-header">
+                    <h3>Task categories</h3>
+                    <button className="close-btn" onClick={onClose}>X</button>
+                </div>
                 <div className="categories-wrapper">
                     {categories.length>0 && (
                         categories.map((category, index) => 
@@ -34,6 +41,14 @@ export default function TaskCategories({onClose}) {
                                 // disabled={category===activeCategory}
                                 >
                                     {category}
+                                    <span 
+                                        style={{marginLeft: '1rem', marginBottom: '0.5rem', opacity: 0.6}}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            deleteCategory(index)}}
+                                    >
+                                        x
+                                    </span>
                             </button>
                         )
                     )}
@@ -44,10 +59,7 @@ export default function TaskCategories({onClose}) {
                         value={newCategory} 
                         placeholder="Add new category" 
                         onChange={(e) => setNewCategory(e.target.value)} />
-                    <button className="add-btn" onClick={addCategory}>Add</button>
-                </div>
-                <div className="close-btn-wrapper">
-                    <button className="close-btn" onClick={onClose}>Close</button>
+                    <button className="add-btn add-category" onClick={addCategory}>Add</button>
                 </div>
             </div>
         </div>
