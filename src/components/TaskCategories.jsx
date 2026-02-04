@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 // import { TaskContext, CategoryContext } from "./TaskContext";
 
-export default function TaskCategories({onClose}) {
-    const [categories, setCategories] = useState(() => {
-        const savedCategories = localStorage.getItem('categories');
-        return savedCategories ? JSON.parse(savedCategories) : [];
-    });
-    
+export default function TaskCategories({categories, setCategories, onClose}) {    
     const [newCategory, setNewCategory] = useState('');
     // const {setCategory, activeTaskId} = useContext(TaskContext);
     // const {activeCategory} = useContext(CategoryContext);

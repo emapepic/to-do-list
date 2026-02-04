@@ -27,6 +27,11 @@ function App() {
   const [searchingTasks, setSearchingTasks] = useState('');
   const [showCategoryModal, setShowCategoryModal] = useState(false);
 
+  const [categories, setCategories] = useState(() => {
+    const savedCategories = localStorage.getItem("categories");
+    return savedCategories ? JSON.parse(savedCategories) : [];
+  });
+
   // niz task se cuva u localStorage kad dodje do njegove promjene
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -162,11 +167,14 @@ function App() {
             setInput={(e) => setInputValue(e.target.value)}
             addTask={addTask}
             onClose={() => setShowInputFields(false)}
-            errorMsg={errorMsg} 
+            errorMsg={errorMsg}
+            categories={categories} 
           />
         }
         {showCategoryModal && 
-          (<TaskCategories 
+          (<TaskCategories
+            categories={categories} 
+            setCategories={setCategories}
             onClose={() => setShowCategoryModal(false)}
             // setIsOpen={setShowCategoryModal}
             />)

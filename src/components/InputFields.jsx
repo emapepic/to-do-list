@@ -1,4 +1,12 @@
-export default function InputFields({inputValue, setInput, addTask, onClose, errorMsg, priority, setPriority}) {
+export default function InputFields({inputValue, 
+  setInput, 
+  addTask, 
+  onClose, 
+  errorMsg, 
+  priority, 
+  setPriority,
+  categories
+}) {
   return (
     <div className='modal-overlay'>
       <div className='modal new-task'>
@@ -19,8 +27,9 @@ export default function InputFields({inputValue, setInput, addTask, onClose, err
             <div className='input-container'>
               <label>Category</label>
               <select>
-                <option>School</option>
-                <option>Work</option>
+                {categories.map((category, index) =>
+                  <option key={index}>{category}</option> 
+                )}
               </select>
             </div>
           </div>
