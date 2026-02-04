@@ -1,25 +1,25 @@
 import { useState } from "react";
 
 export default function InputFields({
-  inputValue, 
-  setInput, 
-  addTask, 
+  saveTask, 
   onClose, 
   errorMsg,
-  categories
+  categories,
+  editingTask
 }) {
 
-  const [priority, setPriority] = useState('');
-  const [category, setCategory] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [text, setText] = useState(editingTask ? editingTask.text : '');
+  const [priority, setPriority] = useState(editingTask ? editingTask.priority : '');
+  const [category, setCategory] = useState(editingTask ? editingTask.category : '');
+  const [dueDate, setDueDate] = useState(editingTask ? editingTask.dueDate : '');
 
   return (
     <div className='modal-overlay'>
       <div className='modal new-task'>
-        <h1>Add new task</h1>
+        <h1>{editingTask ? "Edit Task" : "Add new task"}</h1>
           <div className='input-container'>
             <label>Task title</label>
-            <input type="text" value={inputValue} onChange={setInput} />
+            <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
           </div>
           <div className='task-options'>
             <div className='input-container'>
@@ -45,7 +45,11 @@ export default function InputFields({
           </div>
           <div className='input-btns-container'>
             <button onClick={onClose}>Cancel</button>
-            <button className='add-btn' onClick={() => addTask(dueDate, priority, category)}>Add task</button>
+            <button 
+              className='add-btn' 
+              onClick={() => saveTask(text, priority, category, dueDate)}>
+                {editingTask ? "Save changes" : "Add task"}
+            </button>
           </div>
           {errorMsg && <p className="error-msg">You can't save an empty task.</p>}
       </div>

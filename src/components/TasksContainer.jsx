@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Task from './Task.jsx';
 import { TaskContext } from './TaskContext.jsx';
 
-export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
+export default function TasksContainer({tasks, setTasks, openEditModal}) {  // prosledjujemo setTask kako bi mogli promijeniti niz tasks
     // prosledjuje se id taska koji treba da se obrise i u setTask se ostavljaju samo taskovi koji nemaju taj id
     const [activeTaskId, setActiveTaskId] = useState(null);
     
@@ -15,38 +15,6 @@ export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo se
         setTasks(prevTasks => 
             prevTasks.map(task =>
             task.id === id ? {...task, completed: !task.completed} : task)
-        )
-    }
-
-    const updateTask = (id, newTaskDesc) => {
-        setTasks(prevTasks => 
-            prevTasks.map(task =>
-                task.id === id ? {...task, text: newTaskDesc} : task
-            )
-        )
-    }
-
-    const setPriority = (id, priority) => {
-        setTasks(prevTasks =>
-            prevTasks.map(task =>
-                task.id === id ? {...task, priority: priority} : task
-            )
-        )
-    }
-
-    const setDueDate = (id, dueDate) => {
-        setTasks(prevTasks =>
-            prevTasks.map(task =>
-                task.id === id ? {...task, dueDate: dueDate} : task
-            )
-        )
-    }
-
-    const setCategory = (id, category) => {
-        setTasks(prevTasks =>
-            prevTasks.map(task =>
-                task.id === id ? {...task, category: category} : task
-            )
         )
     }
 
@@ -63,7 +31,7 @@ export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo se
     const sortedTasks = [...tasks].sort((a, b) => a.completed - b.completed);
 
     return (
-        <TaskContext.Provider value={{setCategory, activeTaskId, setActiveTaskId}}>
+        <TaskContext.Provider value={{activeTaskId, setActiveTaskId}}>
             <div className='task-container'>
                 <ul>
                     {/* komponenti se prosledjuje niz taskova pa koristimo map da svaki task unesemo kao element liste */}
@@ -73,10 +41,7 @@ export default function TasksContainer({tasks, setTasks}) {  // prosledjujemo se
                             task={task}
                             deleteTask={() => deleteTask(task.id)} 
                             completedTask={() => completedTask(task.id)}
-                            updateTask={(newTaskDesc) => updateTask(task.id, newTaskDesc)}
-                            setDueDate={(dueDate) => setDueDate(task.id, dueDate)}
-                            setPriority={(priority) => setPriority(task.id, priority)}
-                            setCategory={(category) => setCategory(task.id, category)}
+                            openEditModal={openEditModal}
                         /> 
                     ))}
                 </ul>             

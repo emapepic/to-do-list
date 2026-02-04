@@ -17,14 +17,18 @@ function App() {
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
-  const [inputValue, setInputValue] = useState('');
+  const [editingTask, setEditingTask] = useState(null);
+
+   const [sortOrderAsc, setSortOrderAsc] = useState(null);
+
   const [statusFilter, setStatusFilter] = useState('All');
-  const [sortOrderAsc, setSortOrderAsc] = useState(null);
   const [filters, setFilters] = useState({
     priority: 'all',
     category: 'all'
   });
+
   const [searchingTasks, setSearchingTasks] = useState('');
+
   const [showCategoryModal, setShowCategoryModal] = useState(false);
 
   const [categories, setCategories] = useState(() => {
@@ -37,30 +41,48 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  function showInputField() {
-    setShowInputFields(true);
-  }
-
   function showCategoriesModal() {
     setShowCategoryModal(true);
   }
 
-  function addTask(dueDateInput, priorityInput, categoryInput) {
-    // da se u niz postojecih taskova doda novi task koji je unesen u input polje
-    if(inputValue.trim()!='') {
-      setTasks(prevTasks => [...prevTasks, 
-              {id: crypto.randomUUID(), // crypto.randomUUID generise jedinstveni id
-               text: inputValue, 
-               completed: false, 
-               dueDate: dueDateInput ?? null, 
-               priority: priorityInput ?? null, 
-               category: categoryInput ?? null}]);           
-      setInputValue('');
-      setShowInputFields(false);
-      setErrorMsg(false)
+  const openAddModal = () => {
+    setEditingTask(null);   
+    setShowInputFields(true);
+  };
+
+  const openEditModal = (task) => {
+    setEditingTask(task);   
+    setShowInputFields(true); 
+  };
+
+  function saveTask(text, priority, category, dueDate) {
+    if (text.trim() === '') {
+      setErrorMsg(true);
+      return;
     }
-    else setErrorMsg(true);
-  }
+
+    setTasks(prevTasks => {
+      if (editingTask) {
+        return prevTasks.map(task =>
+          task.id === editingTask.id ? { ...task, text, priority, category, dueDate } : task
+        );
+      } else {
+        const newTask = {
+          id: crypto.randomUUID(),
+          text,
+          completed: false,
+          dueDate: dueDate || null,
+          priority: priority || null,
+          category: category || null
+        };
+        return [...prevTasks, newTask];
+      }
+    });
+
+    setEditingTask(null);
+    setShowInputFields(false);
+    setErrorMsg(false);
+}
 
   function sortTasks() {
     const sorted = [...tasks].sort((a, b) => {  
@@ -147,29 +169,25 @@ function App() {
         </div>
         <div className='btns-container'>
           <div className='btns-wrapper'>
-            <button className='add-btn' onClick={showInputField}>Add task</button>
+            <button className='add-btn' onClick={openAddModal}>Add task</button>
             <button onClick={showCategoriesModal}>Categories</button>
           </div>
           {filteredTasks.length > 0 && 
               (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
         </div>
         {tasks.length > 0 ? 
-          <TasksContainer tasks={filteredTasks} setTasks={setTasks} /> : 
+          <TasksContainer tasks={filteredTasks} setTasks={setTasks} openEditModal={openEditModal} /> : 
           <p style={{textAlign: 'center'}}>
             There's no tasks to complete, create new ones 🙂
           </p>
         }
-        {/*da bi uzeli sta je uneseno u input polje koristimo setInput da vrijednost stavimo u value
-          tu vrijednost u funkciji addTask stavljamo u niz postojecih taskova*/}
         {showInputFields && 
-          <InputFields 
-            inputValue={inputValue}
-            setInput={(e) => setInputValue(e.target.value)}
-            addTask={addTask}
-            tasks={tasks}
+          <InputFields
+            saveTask={saveTask}
             onClose={() => setShowInputFields(false)}
             errorMsg={errorMsg}
             categories={categories} 
+            editingTask={editingTask}
           />
         }
         {showCategoryModal && 
@@ -177,7 +195,6 @@ function App() {
             categories={categories} 
             setCategories={setCategories}
             onClose={() => setShowCategoryModal(false)}
-            // setIsOpen={setShowCategoryModal}
             />)
         }
       </div>
