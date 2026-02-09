@@ -160,7 +160,9 @@ function App() {
                   x
                 </span>
               </span>}
-            <button className='icon' onClick={sortTasks}><img src={sortIcon} /></button>
+            <div className='icon'>
+              <button onClick={sortTasks}><img src={sortIcon} /></button>
+            </div>
             <FilterCategories
               setFilters={setFilters}
               categories={[...new Set(tasks.map(task => task.category).filter(category => category != null))]}
