@@ -146,20 +146,6 @@ function App() {
               value={searchingTasks}
               onChange={(e) => setSearchingTasks(e.target.value)}
             />
-            {filters.priority !== 'all' && 
-              <span className='active-filter'>
-                {filters.priority} 
-                <span onClick={() => onRemoveFilter('priority')}>
-                  x
-                </span>
-              </span>}
-            {filters.category !== 'all' && 
-              <span className='active-filter'>
-                {filters.category} 
-                <span onClick={() => onRemoveFilter('category')}>
-                  x
-                </span>
-              </span>}
             <div className='icon'>
               <button onClick={sortTasks}><img src={sortIcon} /></button>
             </div>
@@ -174,8 +160,24 @@ function App() {
             <button className='add-btn' onClick={openAddModal}>Add task</button>
             <button onClick={showCategoriesModal}>Categories</button>
           </div>
-          {filteredTasks.length > 0 && 
-              (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
+          <div className='additional-tasks-info'>
+            {filters.priority !== 'all' && 
+                <span className='active-filter'>
+                  {filters.priority} 
+                  <span onClick={() => onRemoveFilter('priority')}>
+                    x
+                  </span>
+                </span>}
+              {filters.category !== 'all' && 
+                <span className='active-filter'>
+                  {filters.category} 
+                  <span onClick={() => onRemoveFilter('category')}>
+                    x
+                  </span>
+                </span>}
+            {filteredTasks.length > 0 && 
+                (<p className='num-of-tasks'>{filteredTasks.length} {filteredTasks.length === 1 ? "task" : "tasks"}</p>)}
+          </div>
         </div>
         {tasks.length > 0 ? 
           <TasksContainer tasks={filteredTasks} setTasks={setTasks} openEditModal={openEditModal} /> : 
