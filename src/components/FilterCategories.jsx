@@ -7,12 +7,10 @@ export default function FilterCategories({setFilters, categories}) {
     const [showCategories, setShowCategories] = useState(false);
 
     return (
-        <div className="dropdown-wrapper">
-            <button
-                className='icon'
-                onClick={() => setIsOpen(prev => !prev)}>
-                <img src={filterIcon} />
-            </button>
+        <div className="dropdown-wrapper icon">
+                <button onClick={() => setIsOpen(prev => !prev)}>
+                    <img src={filterIcon} />
+                </button>
             {isOpen &&
                 <ul className="dropdown dropdown-filter">
                     <li 
