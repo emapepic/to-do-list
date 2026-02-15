@@ -25,6 +25,7 @@ export default function InputFields({
             <div className='input-container'>
               <label>Priority</label>
               <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+                <option value='' disabled>Select priority</option>
                 <option value='low'>Low</option>
                 <option value='medium'>Medium</option>
                 <option value='high'>High</option>
@@ -33,6 +34,7 @@ export default function InputFields({
             <div className='input-container'>
               <label>Category</label>
               <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                <option value='' disabled>Select category</option>
                 {categories.map((category, index) =>
                   <option key={index}>{category}</option> 
                 )}
