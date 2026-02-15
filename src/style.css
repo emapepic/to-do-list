@@ -255,6 +255,23 @@ input:hover {
   gap: 20px;
 }
 
+/* delete modal */
+.delete-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-task h3 {
+  color: #23509a;
+}
+
+.delete-task button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
 /* filters */
 .filters {
   display: flex;

@@ -1,7 +1,9 @@
-import { TaskContext, CategoryContext } from "./TaskContext";
+import { CategoryContext } from "./TaskContext";
+import DeleteModal from "./DeleteModal";
+import { useState } from "react";
 
 export default function Task ({task, deleteTask, completedTask, openEditModal}) {
-
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const activeCategory = task.category;
 
     return (
@@ -20,9 +22,10 @@ export default function Task ({task, deleteTask, completedTask, openEditModal}) 
                 </div>
                 <div className="task-btns">
                     <button className="edit-btn" onClick={() => openEditModal(task)}>Edit</button>             
-                    <button className="delete-btn" onClick={deleteTask}>Delete</button>           
+                    <button className="delete-btn" onClick={() => setShowDeleteModal(true)}>Delete</button>         
                 </div>
             </li>
+            {showDeleteModal && <DeleteModal taskId={task.id} deleteTask={deleteTask} onClose={() => setShowDeleteModal(false)} />}
         </CategoryContext.Provider>
     );
 }
