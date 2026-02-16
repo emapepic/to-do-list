@@ -6,9 +6,20 @@ export default function FilterCategories({setFilters, categories}) {
     const [showPriorities, setShowPriorities] = useState(false);
     const [showCategories, setShowCategories] = useState(false);
 
+    const toggleMainDropdown = () => {
+        setIsOpen(prev => {
+            if (prev) {
+                setShowPriorities(false);
+                setShowCategories(false);
+            }
+
+            return !prev;
+        });
+    }
+
     return (
         <div className="dropdown-wrapper icon">
-                <button onClick={() => setIsOpen(prev => !prev)}>
+                <button onClick={toggleMainDropdown}>
                     <img src={filterIcon} />
                 </button>
             {isOpen &&
@@ -23,28 +34,28 @@ export default function FilterCategories({setFilters, categories}) {
                                     <li
                                         onClick={() => {
                                             setFilters(filter => ({...filter, priority: 'all'}));
-                                            setIsOpen(false)
+                                            toggleMainDropdown()
                                         }}>
                                             All
                                     </li>
                                     <li
                                         onClick={() => {
                                             setFilters(filter => ({...filter, priority: 'low'}));
-                                            setIsOpen(false)
+                                            toggleMainDropdown()
                                         }}>
                                             Low
                                     </li>
                                     <li
                                         onClick={() => {
                                             setFilters(filter => ({...filter, priority: 'medium'}));
-                                            setIsOpen(false)
+                                            toggleMainDropdown()
                                         }}>
                                             Medium
                                     </li>
                                     <li
                                         onClick={() => {
                                             setFilters(filter => ({...filter, priority: 'high'}));
-                                            setIsOpen(false)
+                                            toggleMainDropdown()
                                         }}>
                                             High
                                     </li>
@@ -61,7 +72,7 @@ export default function FilterCategories({setFilters, categories}) {
                                 <ul className="dropdown">
                                     <li onClick={() => {
                                             setFilters(filter => ({...filter, category: 'all'}));
-                                            setIsOpen(false)
+                                            toggleMainDropdown()
                                         }}>
                                             All
                                     </li>
@@ -70,7 +81,7 @@ export default function FilterCategories({setFilters, categories}) {
                                             key={category}
                                             onClick={() => {
                                             setFilters(filter => ({...filter, category}));
-                                            setIsOpen(false)
+                                            toggleMainDropdown()
                                         }}>
                                                 {category}
                                         </li>
