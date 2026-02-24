@@ -101,7 +101,7 @@ function App() {
     if (statusFilter === 'Active') {
       return !task.completed;
     }
-    if (statusFilter === 'Finished') {
+    if (statusFilter === 'Completed') {
       return task.completed;
     }
     return true;
@@ -146,9 +146,9 @@ function App() {
               value={searchingTasks}
               onChange={(e) => setSearchingTasks(e.target.value)}
             />
-            <div className='icon'>
+            {/* <div className='icon'>
               <button onClick={sortTasks}><img src={sortIcon} /></button>
-            </div>
+            </div> */}
             <FilterCategories
               setFilters={setFilters}
               categories={[...new Set(tasks.map(task => task.category).filter(category => category != null))]}

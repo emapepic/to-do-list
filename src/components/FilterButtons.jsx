@@ -17,9 +17,9 @@ export default function FilterButtons({filter, setFilter}) {
             </li>
             <li>
                 <button 
-                    className={`btn ${filter === 'Finished' ? 'active' : ''}`} 
-                    onClick={() => setFilter('Finished')}>
-                        Finished
+                    className={`btn ${filter === 'Completed' ? 'active' : ''}`} 
+                    onClick={() => setFilter('Completed')}>
+                        Completed
                 </button>
             </li>
         </ul>
