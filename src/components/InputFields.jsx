@@ -33,12 +33,14 @@ export default function InputFields({
             </div>
             <div className='input-container'>
               <label>Category</label>
-              <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                <option value='' disabled>Select category</option>
+              {categories.length > 0 ?
+                (<select value={category} onChange={(e) => setCategory(e.target.value)}>
+                <option value="" disabled>Select category</option>
                 {categories.map((category, index) =>
                   <option key={index}>{category}</option> 
                 )}
-              </select>
+              </select>) 
+              : <p>No categories added</p>}
             </div>
           </div>
           <div className='input-container'>
